@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         text = text + "Order" + drink;
         textView.setText("text");
 
+        editText.setText("");
     }
 
     @Override
