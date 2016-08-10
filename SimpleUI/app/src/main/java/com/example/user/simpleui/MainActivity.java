@@ -4,7 +4,9 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         editText = (EditText) findViewById(R.id.editText);
         radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
-
+        listView = (ListView)findViewById(R.id.listView);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -46,7 +48,16 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        setupListView();
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+    private void setupListView()
+    {
+        String[] data = new String[]{"1","2","3","4","5","6","7","8"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,data);
+        listView.setAdapter(adapter);
     }
 
     public void click(View view) {
