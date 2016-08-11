@@ -1,5 +1,6 @@
 package com.example.user.simpleui;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -130,19 +131,20 @@ public class MainActivity extends AppCompatActivity {
         setupListView();
     }
 
+
+    public void goToMenu(View view)
+    {
+       Intent intern = new Intent();
+        Intent.setClass(this, DrinkMenuActivity.class);
+        startActivity(Intent);
+
+    }
+}
+
     @Override
     public void onStart() {
         super.onStart();
         Log.d("DEBUG", "MainActivity OnStart");
-
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW,
-                "Main Page",
-                Uri.parse("http://host/path"),
-                Uri.parse("android-app://com.example.user.simpleui/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
@@ -161,27 +163,17 @@ public class MainActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         Log.d("DEBUG", "MainActivity OnStop");
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.user.simpleui/http/host/path")
-        );
+    }
         @Override
         public void onDestroy() {
             super.onDestroy();
             Log.d("DEBUG", "MainActivity OnDestroy");
+        }
         @Override
         public void onRestart() {
             super.onRestart();
             Log.d("DEBUG", "MainActivity OnRestart");
-
+        }
                 AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
