@@ -1,8 +1,10 @@
 package com.example.user.simpleui;
 
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -71,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
         setupListView();
         setupSpinner();
+
+
+        Log.d("DEBUG", "MainActivity OnCreate");
+
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
     private void setupListView()
@@ -126,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
+        Log.d("DEBUG", "MainActivity OnStart");
 
         client.connect();
         Action viewAction = Action.newAction(
@@ -139,9 +146,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("DEBUG", "MainActivity OnResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("DEBUG", "MainActivity OnPause");
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
-
+        Log.d("DEBUG", "MainActivity OnStop");
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
@@ -154,7 +173,16 @@ public class MainActivity extends AppCompatActivity {
                 // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.example.user.simpleui/http/host/path")
         );
-        AppIndex.AppIndexApi.end(client, viewAction);
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            Log.d("DEBUG", "MainActivity OnDestroy");
+        @Override
+        public void onRestart() {
+            super.onRestart();
+            Log.d("DEBUG", "MainActivity OnRestart");
+
+                AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
 }
