@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,15 +37,17 @@ public class DrinkMenuActivity extends AppCompatActivity {
         drinkMenuListView = (ListView) findViewById(R.id.drinkMenuListView);
         totalTextView = (TextView)findViewById(R.id.)
 
+        drinkMenuListView.setOnItemClickListener(new AdapterView.OnItemClickListener());
 
-
+        @Override
+        public void onItemClick (AdapterView<?>parent , View view, int ){
+            super.onItemClick();
 
 
         Log.d("DEBUG", "DrinkMenuActivity");
 
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
